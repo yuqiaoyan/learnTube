@@ -2,23 +2,210 @@
 <html>
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<script type ="text/javascript">
+	function showpopup(){
+		document.getElementById("popup").style.visibility="visible";
+	}
+	</script>
     <style type="text/css">
-      
-
+	body {
+		font-family:Helvetica, Arial;
+		font-size:18px;
+	}
+	
+      #content {
+		width:1024px;
+		height:173px;
+	  }
+	  
+	  #words {
+		width:944px;
+		float:left;
+		height:173px;
+	  }
+	  #words>p {
+		margin: 10px;
+		padding: 0px;
+	  }
+	  
+	  #words span {
+		font-size:21px;
+		padding-left:10px;
+		padding-right:10px;
+		padding-top:2px;
+		padding-bottom:2px;
+		margin: 10px;
+		margin-left:0px;
+		background-color: #646464;
+	  }
+	  
+	  #words span:hover {
+	   cursor:pointer;
+	  }
+	  
+	  #words span.selected {
+		background-color: #5eb5e3;
+	  }
+	  
+	  #words span.upcoming {
+		background-color: #7598ab;
+	  }
+	  
+	  #savedWords {
+		background-color:#e3ba3c;
+		width:80px;
+		float:right;
+		height:173px;
+	}
+	  
+	  #icon {
+		padding-top:61px;
+		width:50px;
+		margin-left:auto;
+		margin-right:auto;
+	  }
+	  
+	  #note {
+		position:relative;
+	  }
+	
+	  #circle {
+		position:relative;
+		top:-70px;
+		left:-13px;
+		z-index:1;
+	  }
+	  
+	  #wordCount {
+		color:white;
+		position:relative;
+		top:-78px;
+		left:-38px;
+		z-index:2;
+	  }
+	  
+	  #popup {
+		position:absolute;
+		width:1024px;
+		height:180px;
+		z-index:4;
+		top:557px;
+		left:-15px;
+		visibility:hidden;
+	  }
+	  
+	  #image1 {
+		position:relative;
+	  }
+	  
+	  #image2 {
+		position:relative;
+		z-index:5;
+		top: -202px;
+		left: 37px;
+	  }
+	  
+	  #def {
+		padding:12px;
+		position:relative;
+		z-index:5;
+		top: -385px;
+		left: 190px;
+		width: 475px;
+		height:160px;
+		font-size:16px;
+		color: white;
+	  }
+	  
+	  #def #source {
+		color: #666666;
+		position:relative;
+		top:14px;
+		left:0px;
+		margin:0px;
+	  }
+	  
+	  #def #more {
+		position:relative;
+		top:-21px;
+		left:382px;
+		color: #63b8e4;
+	  }
+	  
+	  #comment_box {
+		padding:12px;
+		position:absolute;
+		z-index:5;
+		top: 20px;
+		left: 670px;
+		width: 290px;
+		height:160px;
+		font-size:14px;
+		color: white;
+	  }
+	  
+	  #comment_box p {
+		color: white;
+	  }
+	  
+	  #mask {
+		position:relative;
+		z-index:6;
+		top:-65px;
+		left:-5px;
+	  }
+	  
+	  #close{
+		position:relative;
+		z-index:6;
+		top:-65px;
+	  }
     </style>
     <script src="js/youtube.js"> </script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
   </head>
   <body>
-
     <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
-    <div id="player"></div>
-
-    
+	<div id="player"></div> 
+	<div id="popup"><img src="bg_popup-horiz.png" id="image1" />
+	<img src="cells.png" id="image2" />
+	<div id="def">
+		<p>The cell is the basic structural, functional and biological unit of all known living organisms. It is the smallest unit of life that is classified as a living thing (except virus, which consists only of DNA/RNA covered by protein and lipids), and is often called the "building block of life"...</p>
+		<p id="source">Wikipedia</p>
+		<p id="more"><strong>Read More</strong></p>
+	</div>
+	<div id="comment_box">
+	<p>COMMENTS</p>
+	<p>Jack <br/>
+	Did you know blood clotting is called hemostasis, which prevents blood loss.</p>
+	<p>Sandra<br/>	
+Yes...when the lining of a blood vessel (endothelium) is damaged, platelets  </p>
+	<img src="mask.png" id="mask"/>
+	</div>
+	<div>
+		<img src="icon_x-small.png" id="close" />
+	</div>
+	</div>
     <div id = "content">
-      <div class = "words">
-        WORDS will be displayed here
+      <div id = "words">
+		<p>Some words you may want to know coming up:<p>
+		<span>prokaryotic</span>
+        <span>Anderson</span>
+		<span>Malaria</span>
+		<span class="selected" onclick="showpopup();">cells</span>
+		<span>division</span>
+		<span class="upcoming">bacteria</span>
+		<span>zygote</span>
       </div>
+	  <div id="savedWords">
+		<div id="icon">	
+			<img src="note.png" alt="icon" id="note"/>
+			<img src="circle.png" alt="circle" id="circle"/>
+			
+			<!-- Javascript will replace the number -->
+			<span id="wordCount">5</span>
+		</div>
+	  </div>
     </div>
     <script type ="text/javascript">
       var baseURL = "http://video.google.com/timedtext?lang=en&v=";
@@ -43,10 +230,7 @@
              //called when there is an error
              console.log(errorThrown)
            }
-         });
-
-
-          
+         });    
       }
 
       /* Sample JSON
