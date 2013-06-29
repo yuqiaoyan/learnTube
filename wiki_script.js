@@ -1,5 +1,5 @@
 $(document).ready(function() {
-$.ajax("http://en.wikipedia.org/w/api.php?format=jsonfm&action=query&titles=Malaria&prop=revisions&rvprop=content", {
+$.ajax('http://en.wikipedia.org/w/api.php?action=query&prop=revisions&titles=Threadless&rvprop=content&format=json&rvsection=0&rvparse=1', {
 			success : wikiSuccess,
 			error : ajaxError
 		});
