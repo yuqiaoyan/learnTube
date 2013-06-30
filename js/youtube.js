@@ -9,7 +9,7 @@ function getWords(videoID,cb){
       //pass videoID to backend and get 
       $.ajax({
         dataType:"json",
-        url: 'data/6uwVhn-APsQ.json',
+        url: 'data/NFdeXi9Gfpc.json',
         success: function(data){
           console.log("+JSON data received")
           wordsData = data;
@@ -37,13 +37,13 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 // 3. This function creates an <iframe> (and YouTube player)
 //    after the API code downloads.
 var player;
-var videoLoc = "6uwVhn-APsQ";
+var videoLoc = "NFdeXi9Gfpc";
 
 function onYouTubeIframeAPIReady() {
   console.log("this is videoLoc " + videoLoc)
   player = new YT.Player('player', {
-    height: '360',
-    width: '640',
+    height: '575',
+    width: '1024',
     videoId: videoLoc,
     events: {
       'onReady': onPlayerReady,
@@ -138,9 +138,12 @@ function getVideoTime(){
       while(wordsData[wordsIndex] != null && wordsData[wordsIndex].time < segment.endTime){
             //wordsIndex++;
           console.log("+PRINT WORDS")
+          var spanCount = $('#words > span').length;
+          if(spanCount > 3)
+            $('#words').html("<h3>Some words you may want to know coming up:</h3>");
 
           $.each(wordsData[wordsIndex].words, function(index,value){
-                $('<p>'+value+'</p>').appendTo('.words');                
+                $('<span>'+value+'</span>').appendTo('#words');                
           })
           wordsIndex++;
             
@@ -169,7 +172,7 @@ function getVideoTime(){
     console.log(segment.totalVideoTime);
     clearInterval(timerT);
   }
-  
+
   segment.currVideoTime = player.getCurrentTime();
 
 

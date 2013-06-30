@@ -6,6 +6,9 @@
 	function showpopup(){
 		document.getElementById("popup").style.visibility="visible";
 	}
+  function hidepopup(){
+    document.getElementById("popup").style.visibility="hidden";
+  }
 	</script>
     <style type="text/css">
 	body {
@@ -156,10 +159,15 @@
 	  }
 	  
 	  #close{
-		position:relative;
-		z-index:6;
-		top:-65px;
-	  }
+    position:absolute;
+    z-index:5;
+    top:60px;
+    left: 985px;
+    }
+    
+    #close:hover {
+    cursor:pointer;
+    }
     </style>
     <script src="js/youtube.js"> </script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
@@ -180,22 +188,19 @@
 	Did you know blood clotting is called hemostasis, which prevents blood loss.</p>
 	<p>Sandra<br/>	
 Yes...when the lining of a blood vessel (endothelium) is damaged, platelets  </p>
-	<img src="mask.png" id="mask"/>
-	</div>
-	<div>
-		<img src="icon_x-small.png" id="close" />
+	
+  <img src="mask.png" id="mask"/>
+	
+  </div>
+	<div id="close" onclick="hidepopup();">
+		<img src="icon_x-small.png" />
 	</div>
 	</div>
     <div id = "content">
       <div id = "words">
-		<p>Some words you may want to know coming up:<p>
-		<span>prokaryotic</span>
-        <span>Anderson</span>
-		<span>Malaria</span>
-		<span class="selected" onclick="showpopup();">cells</span>
-		<span>division</span>
-		<span class="upcoming">bacteria</span>
-		<span>zygote</span>
+		<h3>Some words you may want to know coming up:</h3>
+			<span class="selected" onclick="showpopup();">cells</span>
+		
       </div>
 	  <div id="savedWords">
 		<div id="icon">	
@@ -207,41 +212,6 @@ Yes...when the lining of a blood vessel (endothelium) is damaged, platelets  </p
 		</div>
 	  </div>
     </div>
-    <script type ="text/javascript">
-      var baseURL = "http://video.google.com/timedtext?lang=en&v=";
-      var videoID = "I8xZBfVsMzs";
-
-      function getWords(videoID){
-      //pass videoID to backend and get 
-        jQuery.ajax({
-           url: '/path/to/file',
-           type: 'POST',
-           dataType: 'xml/html/script/json/jsonp',
-           data: {param1: 'value1'},
-           complete: function(xhr, textStatus) {
-             //called when complete
-           },
-           success: function(data, textStatus, xhr) {
-             //called when successful
-
-              return wordCloud
-           },
-           error: function(xhr, textStatus, errorThrown) {
-             //called when there is an error
-             console.log(errorThrown)
-           }
-         });    
-      }
-
-      /* Sample JSON
-      {[{
-        time:0.4,
-        words:["apple", "bat","car"]
-      },
-        time: 0.9,
-        words:["apple","bar","car"]
-      ]} */
-
-    </script>
+    
   </body>
 </html>
